@@ -3,7 +3,7 @@ const app = express();
 
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const Users = require('../model/user');
+const Users = require('.user');
 
 const url = 'mongodb+srv://Filipi:intelligir123@cluster0-xm1li.mongodb.net/test?retryWrites=true&w=majority';
 const options = { reconnectTries: Number.MAX_VALUE, reconnectInterval: 500, poolSize: 5, useNewUrlParser: true };
@@ -25,7 +25,7 @@ mongoose.connection.on('disconnected', (err) => {
 
 app.get('/', (req, res) => {
 
-    if (err) return res.send(console.error("Erro na consulta do feriado"));
+    if (err) return res.send(console.error("Erro na consulta do usuário"));
 
     return res.send(data);
 });
@@ -50,9 +50,6 @@ app.post('/create', (req, res) => {
 
     return res.send("Seu usuário foi criado =)");
 })
-
-
-
 
 
 
