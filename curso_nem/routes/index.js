@@ -9,3 +9,8 @@ router.post('/', (req, res) => {
 })
 
 module.exports = router;
+
+
+
+//Por enquanto tive que ignorar aqui pois, o mesmo, estava igual ao do
+//professor, mas não estava funcionando, aguardando suporte
