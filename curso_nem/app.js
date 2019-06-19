@@ -1,14 +1,12 @@
 const express = require('express');
 const app = express();
+const indexRoute = require('./routes/index.');
+const usersRoute = require('./routes/users');
 
-app.get('/',(req,res)=>{
-    
-    return res.send("Deu Certo Filipi")
-});
+app.use('/', indexRoute);
+app.use('/users', usersRoute)
 
-app.post('/',(req,res)=>{
-    return res.send("Deu Certo Filipi")
-})
+
 
 console.log("Server run")
 
