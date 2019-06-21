@@ -25,7 +25,7 @@ mongoose.connection.on('disconnected', (err) => {
 
 app.get('/', (req, res) => {
 
-    if (err) return res.send(console.error("Erro na consulta do usuário"));
+    if (err) return res.send(console.log("Erro na consulta do usuário"));
 
     return res.send(data);
 });
@@ -34,14 +34,14 @@ app.post('/create', (req, res) => {
 
     const { email, password } = req.body;
 
-    if (!email || !password) return res.send(console.error("Dados insuficientes"));
+    if (!email || !password) return res.send(console.log("Dados insuficientes"));
 
     Users.findOne({ email }, (err, data) => {
-        if (err) return res.send(console.error("Erro ao buscar usuário!"));
-        if (data) return res.send(console.error("Usuário ja exisitente"));
+        if (err) return res.send(console.log("Erro ao buscar usuário!"));
+        if (data) return res.send(console.log("Usuário ja exisitente"));
 
         Users.create(req.body, (err, data) => {
-            if (err) return res.send(console.error("Erro ao criar usuário!"));
+            if (err) return res.send(console.log("Erro ao criar usuário!"));
             return res.send(data);
 
         })
