@@ -1,7 +1,11 @@
 const express = require('exprss');
 const router = express.Router();
+const auth = require('../middleares/auth');
 
-router.get('/', (req, res) => {
+
+
+router.get('/', auth, (req, res) => {
+    console.log(res.locals.auth_data);
     return res.send("Deu certo o index.js/GET");
 })
 router.post('/', (req, res) => {
@@ -11,6 +15,3 @@ router.post('/', (req, res) => {
 module.exports = router;
 
 
-
-//Por enquanto tive que ignorar aqui pois, o mesmo, estava igual ao do
-//professor, mas não estava funcionando, aguardando suporte

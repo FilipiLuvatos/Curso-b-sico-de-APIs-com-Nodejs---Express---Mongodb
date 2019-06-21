@@ -2,6 +2,13 @@ const express = require('exprss');
 const router = express.Router();
 const Users = require('../model/user');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
+//Funções auxiliares
+
+const createUserToken = (userId) => {
+    return jwt.sign({ id: userId }, 'Filipi123', { expiresIn: '7d' });
+}
 
 
 router.get('/', async (req, res) => {
@@ -28,6 +35,9 @@ router.post('/create', async (req, res) => {//Refatorado a baixo
         if (await Users.findOne({ email })) return res.send(console.log("Usuario já registrado!!!!"))
         const user = await Users.create(req.body);
         user.password = undefined;
+
+        return res.send({ user, token: createUserToken(user.id) });
+
         return res.send(user);
 
     } catch (err) {
@@ -80,6 +90,8 @@ router.post('/auth', async (req, res) => {
         if (!pass_ok) return res.send(console.log("Erro ao autenticar usuario"));
         user.password = undefined;
 
+        return res.send({ user, token: createUserToken(user.id) });
+
         return res.send(user);
 
 
@@ -117,5 +129,3 @@ router.post('/auth', async (req, res) => {
 module.exports = router;
 
 
-//Por enquanto tive que ignorar aqui pois, o mesmo, estava igual ao do
-//professor, mas não estava funcionando, aguardando suporte
