@@ -10,15 +10,17 @@ const UserSchema = new Schema({
 
 });
 
-UserSchema.pre('save', function (next) { // não usar função de seta, porque ele vai 
+UserSchema.pre('save', async function (next) { // não usar função de seta, porque ele vai 
     // dar problema por causa do this. 
     let user = this;
     if (!user.isModified('passoword')) return next();
 
-    bcrypt.hash(user.password, 10, (err, encryted)=>{
+    user.password = await bcrypt.hash(user.password, 10);
+
+   /* bcrypt.hash(user.password, 10, (err, encryted) => { //Refatorada acima
         user.password = encryted;
         return next();
-    })
+    })*/
 
 });
 
